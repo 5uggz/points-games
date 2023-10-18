@@ -4,7 +4,54 @@
     <title>Your JavaScript Game</title>
 </head>
 <body>
-    <script src="game.js"></script>
+    <div id="output"></div>
+    <input id="input" type="text" placeholder="Enter a command">
+    <button id="run">Run</button>
+
+    <script>
+        let points = 0;
+        let upgrade;
+        let multiply;
+        let upgradeinput;
+
+        const outputDiv = document.getElementById("output");
+        const inputElement = document.getElementById("input");
+        const runButton = document.getElementById("run");
+
+        runButton.addEventListener("click", () => {
+            const line = inputElement.value;
+            inputElement.value = "";
+
+            if (line === "check") {
+                outputDiv.innerHTML += "Checking points...<br>";
+                outputDiv.innerHTML += "points: " + points + "<br>";
+            } else if (line === "") {
+                if (upgrade === "true") {
+                    if (multiply === "true") {
+                        points *= 2;
+                    } else {
+                        outputDiv.innerHTML += "critical error with upgrades<br>";
+                    }
+                } else {
+                    outputDiv.innerHTML += "+1 point<br>";
+                    points++;
+                }
+            } else if (line === "exit") {
+                outputDiv.innerHTML += "exiting game...<br>";
+            } else if (line === "help") {
+                outputDiv.innerHTML += "commands<br>";
+                outputDiv.innerHTML += "-check | checks your points<br>";
+                outputDiv.innerHTML += "-reset | resets your points<br>";
+                outputDiv.innerHTML += "-upgrade | you can purchase upgrades here<br>";
+                outputDiv.innerHTML += "-exit | exits the game<br>";
+                outputDiv.innerHTML += "more coming soon<br>";
+            } else if (line === "reset") {
+                points = 0;
+                outputDiv.innerHTML += "Points reset to 0<br>";
+            } else {
+                outputDiv.innerHTML += "Unrecognized command: " + line + "<br>";
+            }
+        });
+    </script>
 </body>
 </html>
-
